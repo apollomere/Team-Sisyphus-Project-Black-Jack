@@ -14,7 +14,8 @@ int main () {
 
 
 //Compare Function
-  for(int i = 0; i < sz; i++);//Size needs to be dynamic for DECK type objects(malloc utility?) wondering how to effectively implement it at the moment.
+  for(int i = 0; i < sz; i++);//Size needs to be dynamic for DECK type objects(malloc utility?) wondering how to effectively implement it at the moment.-Andre
+                              //Okay, I realize with structs, it comes to my question, how much byte space would our defined structs take up. Like, within a DECK object type, I assume it's counting the member data types, but, I'm still ultimately learning their applicability, could be wrong-Andre
   
   return 0;
 };
