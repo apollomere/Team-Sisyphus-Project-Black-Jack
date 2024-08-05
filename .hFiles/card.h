@@ -14,6 +14,19 @@ struct card{
     
 };
 
+/*array cardPlayer[handsize];
+for(int i = 0; i < 2; i++){
+
+cardPlayer[i].name = drawPlayercard(primaryDeck[b].name);
+char drawPlayercard(primaryDeck ){
+    
+    
+}
+return card;
+
+8/4: Experimenting with code for drawing cards, use as needed. NOT FUNCTIONAL - Jestyn*/
+
+
 //typedef struct cardDeck deck;
 /*Jestyn: Keeping this a comment for now because we want cards and 
 the deck to be seperate objects. Deck should be an array that stores
