@@ -7,7 +7,6 @@
 #define STRLEN 100
 
 struct card{
-    char suit[STRLEN+1];
     char name[STRLEN+1];
     int pointValue;
     bool cardIsDrawn;
