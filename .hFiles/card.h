@@ -13,7 +13,7 @@ struct card{
     bool cardIsDrawn;
     
 };
-
+typedef struct card dk;
 /*array cardPlayer[handsize];
 for(int i = 0; i < 2; i++){
 
