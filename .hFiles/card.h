@@ -1,18 +1,21 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include <stdio.h>
-#include <stdbool.h>
-
 #define STRLEN 100
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 struct card{
     char name[STRLEN+1];
     int pointValue;
-    bool cardIsDrawn;
+    int cardIsDrawn;
     
 };
 typedef struct card dk;
+
+extern void play();
+extern int random(int min, int max);
 /*array cardPlayer[handsize];
 for(int i = 0; i < 2; i++){
 
