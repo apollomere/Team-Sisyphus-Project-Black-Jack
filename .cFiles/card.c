@@ -1,252 +1,157 @@
-#include <stdio.h>
-#include "card.h"
-//Including code for reference
-/*struct card{
-    char name[STRLEN+1];
-    int pointValue;
-    bool cardIsDrawn;
-    
-};
-
-Listed below are instances of card struct - Jestyn.
+/*
+This has been pretty severely changed since my last update to the repository. I'm working to add comments where I can so we can both effectively track and edit the code.
 */
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+#include "Card.h"
 
-//Instances of Ace cards
-dk dk1;
-dk1.name = "Ace.hearts"
-dk1.pointValue = 1;
-dk1.cardIsDrawn = false;
-dk dk2;
-dk2.name = "Ace.clubs"
-dk2.pointValue = 1;
-dk2.cardIsDrawn = false;
-dk dk3;
-dk3.name = "Ace.spades"
-dk3.pointValue = 1;
-dk3.cardIsDrawn = false;
-dk dk4;
-dk4.name = "Ace.diamonds"
-dk4.pointValue = 1;
-dk4.cardIsDrawn = false;
-
-//Instances of "2" cards
-dk dk5;
-dk5.name = "2.hearts"
-dk5.pointValue = 2;
-dk5.cardIsDrawn = false;
-dk dk6;
-dk6.name = "2.clubs"
-dk6.pointValue = 2;
-dk6.cardIsDrawn = false;
-dk dk7;
-dk7.name = "2.spades"
-dk7.pointValue = 2;
-dk7.cardIsDrawn = false;
-dk dk8;
-dk8.name = "2.diamonds"
-dk8.pointValue = 2;
-dk8.cardIsDrawn = false;
-
-//Instances of "3" cards
-dk dk9;
-dk9.name = "3.hearts"
-dk9.pointValue = 3;
-dk9.cardIsDrawn = false;
-dk dk10;
-dk10.name = "3.clubs"
-dk10.pointValue = 3;
-dk10.cardIsDrawn = false;
-dk dk11;
-dk11.name = "3.spades"
-dk11.pointValue = 3;
-dk11.cardIsDrawn = false;
-dk dk12;
-dk12.name = "3.diamonds"
-dk12.pointValue = 3;
-dk12.cardIsDrawn = false;
-
-//Instances of "4" cards
-dk dk13;
-dk13.name = "4.hearts"
-dk13.pointValue = 4;
-dk13.cardIsDrawn = false;
-dk dk14;
-dk14.name = "4.clubs"
-dk14.pointValue = 4;
-dk14.cardIsDrawn = false;
-dk dk15;
-dk15.name = "4.spades"
-dk15.pointValue = 4;
-dk15.cardIsDrawn = false;
-dk dk16;
-dk16.name = "4.diamonds"
-dk16.pointValue = 4;
-dk16.cardIsDrawn = false;
-
-//Instances of "5" cards
-dk dk17;
-dk17.name = "5.clubs"
-dk17.pointValue = 5;
-dk17.cardIsDrawn = false;
-dk dk18;
-dk18.name = "5.spades"
-dk18.pointValue = 5;
-dk18.cardIsDrawn = false;
-dk dk19;
-dk19.name = "5.hearts"
-dk19.pointValue = 5;
-dk19.cardIsDrawn = false;
-dk dk20;
-dk20.name = "5.diamonds"
-dk20.pointValue = 5;
-dk20.cardIsDrawn = false;
-
-//Instances of "6" cards
-dk dk21;
-dk21.name = "6.clubs"
-dk21.pointValue = 6;
-dk21.cardIsDrawn = false;
-dk dk22;
-dk22.name = "6.spades"
-dk22.pointValue = 6;
-dk22.cardIsDrawn = false;
-dk dk23;
-dk23.name = "6.hearts"
-dk23.pointValue = 6;
-dk23.cardIsDrawn = false;
-dk dk24;
-dk24.name = "6.diamonds"
-dk24.pointValue = 6;
-dk24.cardIsDrawn = false;
-
-//Instances of "7" cards
-dk dk25;
-dk25.name = "7.clubs"
-dk25.pointValue = 7;
-dk25.cardIsDrawn = false;
-dk dk26;
-dk26.name = "7.spades"
-dk26.pointValue = 7;
-dk26.cardIsDrawn = false;
-dk dk27;
-dk27.name = "7.hearts"
-dk27.pointValue = 7;
-dk27.cardIsDrawn = false;
-dk dk28;
-dk28.name = "7.diamonds"
-dk28.pointValue = 7;
-dk28.cardIsDrawn = false;
-
-//Instances of "8" cards
-dk dk29;
-dk29.name = "8.clubs"
-dk29.pointValue = 8;
-dk29.cardIsDrawn = false;
-dk dk30;
-dk30.name = "8.spades"
-dk30.pointValue = 8;
-dk30.cardIsDrawn = false;
-dk dk31;
-dk31.name = "8.hearts"
-dk31.pointValue = 8;
-dk31.cardIsDrawn = false;
-dk dk32;
-dk32.name = "8.diamonds"
-dk32.pointValue = 8;
-dk32.cardIsDrawn = false;
-
-//Instances of "9" cards
-dk dk33;
-dk33.name = "9.clubs"
-dk33.pointValue = 9;
-dk33.cardIsDrawn = false;
-dk dk34;
-dk34.name = "9.spades"
-dk34.pointValue = 9;
-dk34.cardIsDrawn = false;
-dk dk35;
-dk35.name = "9.hearts"
-dk35.pointValue = 9;
-dk35.cardIsDrawn = false;
-dk dk36;
-dk36.name = "9.diamonds"
-dk36.pointValue = 9;
-dk36.cardIsDrawn = false;
-
-//Instances of "10" cards
-dk dk37;
-dk37.name = "10.clubs"
-dk37.pointValue = 10;
-dk37.cardIsDrawn = false;
-dk dk38;
-dk38.name = "10.spades"
-dk38.pointValue = 10;
-dk38.cardIsDrawn = false;
-dk dk39;
-dk39.name = "10.hearts"
-dk39.pointValue = 10;
-dk39.cardIsDrawn = false;
-dk dk40;
-dk40.name = "10.diamonds"
-dk40.pointValue = 10;
-dk40.cardIsDrawn = false;
-
-//Instances of Jack cards
-dk dk41;
-dk41.name = "Jack.clubs"
-dk41.pointValue = 10;
-dk41.cardIsDrawn = false;
-dk dk42;
-dk42.name = "Jack.spades"
-dk42.pointValue = 10;
-dk42.cardIsDrawn = false;
-dk dk43;
-dk43.name = "Jack.hearts"
-dk43.pointValue = 10;
-dk43.cardIsDrawn = false;
-dk dk44;
-dk44.name = "Jack.diamonds"
-dk44.pointValue = 10;
-dk44.cardIsDrawn = false;
-
-//Instances of Queen cards
-dk dk45;
-dk45.name = "Queen.clubs"
-dk45.pointValue = 10;
-dk45.cardIsDrawn = false;
-dk dk46;
-dk46.name = "Queen.spades"
-dk46.pointValue = 10;
-dk46.cardIsDrawn = false;
-dk dk47;
-dk47.name = "Queen.hearts"
-dk47.pointValue = 10;
-dk47.cardIsDrawn = false;
-dk dk48;
-dk48.name = "Queen.diamonds"
-dk48.pointValue = 10;
-dk48.cardIsDrawn = false;
-
-//Instances of King cards
-dk dk49;
-dk49.name = "King.clubs"
-dk49.pointValue = 10;
-dk49.cardIsDrawn = false;
-dk dk50;
-dk50.name = "King.spades"
-dk50.pointValue = 10;
-dk50.cardIsDrawn = false;
-dk dk51;
-dk51.name = "King.hearts"
-dk51.pointValue = 10;
-dk51.cardIsDrawn = false;
-dk dk52;
-dk52.name = "King.diamonds"
-dk52.pointValue = 10;
-dk52.cardIsDrawn = false;
+void play(){
+    
+    //srand is here for randomization in card selection, must be declared at either start of main, or in the same body of code that is calling everything else. - Jestyn
+    srand(time(0));
+    printf("Welcome to BlaCJac!\n\nType 'play' if you would like to play the game, or 'quit' if you would like to leave.\n");
+    char input[6];
+    scanf("%5s", input);
 
 
+    while(strcmp(input, "quit") != 0)
+    {
+    //Primary while-loop will run until user inputs "quit", which will exit the game. The user can enter "quit" at any time they are prompted for input.
+    //Incidentally, the player can also enter "play" at any point to restart the game regardless of process.
+    //Declaring instances of struct card at the start of the loop so that card data is reset if player decides to play again. - Jestyn
+    struct card c1 = {"'A of hearts'", 1, 0};
+    struct card c2 = {"'2 of hearts'", 2, 0};
+    struct card c3 = {"'3 of hearts'", 3, 0};
+    struct card c4 = {"'4 of hearts'", 4, 0};
+    struct card c5 = {"'5 of hearts'", 5, 0};
+    struct card c6 = {"'6 of hearts'", 6, 0};
+    struct card c7 = {"'7 of hearts'", 7, 0};
+    struct card c8 = {"'8 of hearts'", 8, 0};
+    struct card c9 = {"'9 of hearts'", 9, 0};
+    struct card c10 = {"'10 of hearts'", 10, 0};
+    struct card c11 = {"'J of hearts'", 10, 0};
+    struct card c12 = {"'Q of hearts'", 10, 0};
+    struct card c13 = {"'K of hearts'", 10, 0};
+    struct card c14 = {"'A of diamonds'", 1, 0};
+    struct card c15 = {"'2 of diamonds'", 2, 0};
+    struct card c16 = {"'3 of diamonds'", 3, 0};
+    struct card c17 = {"'4 of diamonds'", 4, 0};
+    struct card c18 = {"'5 of diamonds'", 5, 0};
+    struct card c19 = {"'6 of diamonds'", 6, 0};
+    struct card c20 = {"'7 of diamonds'", 7, 0};
+    struct card c21 = {"'8 of diamonds'", 8, 0};
+    struct card c22 = {"'9 of diamonds'", 9, 0};
+    struct card c23 = {"'10 of diamonds'", 10, 0};
+    struct card c24 = {"'J of diamonds'", 10, 0};
+    struct card c25 = {"'Q of diamonds'", 10, 0};
+    struct card c26 = {"'K of diamonds'", 10, 0};
+    struct card c27 = {"'A of clubs'", 1, 0};
+    struct card c28 = {"'2 of clubs'", 2, 0};
+    struct card c29 = {"'3 of clubs'", 3, 0};
+    struct card c30 = {"'4 of clubs'", 4, 0};
+    struct card c31 = {"'5 of clubs'", 5, 0};
+    struct card c32 = {"'6 of clubs'", 6, 0};
+    struct card c33 = {"'7 of clubs'", 7, 0};
+    struct card c34 = {"'8 of clubs'", 8, 0};
+    struct card c35 = {"'9 of clubs'", 9, 0};
+    struct card c36 = {"'10 of clubs'", 10, 0};
+    struct card c37 = {"'J of clubs'", 10, 0};
+    struct card c38 = {"'Q of clubs'", 10, 0};
+    struct card c39 = {"'K of clubs'", 10, 0};
+    struct card c40 = {"'A of spades'", 1, 0};
+    struct card c41 = {"'2 of spades'", 2, 0};
+    struct card c42 = {"'3 of spades'", 3, 0};
+    struct card c43 = {"'4 of spades'", 4, 0};
+    struct card c44 = {"'5 of spades'", 5, 0};
+    struct card c45 = {"'6 of spades'", 6, 0};
+    struct card c46 = {"'7 of spades'", 7, 0};
+    struct card c47 = {"'8 of spades'", 8, 0};
+    struct card c48 = {"'9 of spades'", 9, 0};
+    struct card c49 = {"'10 of spades'", 10, 0};
+    struct card c50 = {"'J of spades'", 10, 0};
+    struct card c51 = {"'Q of spades'", 10, 0};
+    struct card c52 = {"'K of spades'", 10, 0};
+    /////////////////////////////////////////////////////////////////////////////////////
+    struct card cards[52] = {c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13,
+                        c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26,
+                        c27, c28, c29, c30, c31, c32, c33, c34, c35, c36, c37, c38, c39,
+                        c40, c41, c42, c43, c44, c45, c46, c47, c48, c49, c50, c51, c52};
+    /////////////////////////////////////////////////////////////////////////////////////
+        printf("Looped");
+        if(strcmp(input, "play") != 0)
+        {
+            printf("Unrecognized command, please input either 'play' or 'quit' to continue.\n");
+            scanf("%5s", input);
+        }
+        else if(strcmp(input, "play") == 0)
+        {
+            //Like with the struct, all of these will reset with the loop. - Jestyn
+            int p1, d1;
+            char playerHand[12][12];
+            char dealerHand[12][12];
+            int playerPointTotal = 0;
+            int dealerPointTotal = 0;
+            int dealerKnownTotal = 0;
 
-void displayCard(dk* dkData){
+            printf("\nCards will be dealt . . .\n\n");
+            
+            //Initial Deal for Player hand
+            printf("Player's hand is: ");
+            for(int i = 0; i < 2; i++)
+            {
+                int n = random(0, 52);
+                if(cards[n].cardDrawn != 0)
+                {
+                    while(cards[n].cardDrawn != 0)
+                    {
+                        n = random(0, 52);
+                        //printf("\nn is %d and cardDrawn is %d\n", n, cards[n].cardDrawn);
+                        //scanf("%s", input);
+                    }
+                }
+                strcpy(playerHand[i], cards[n].cardName);
+                printf("%s ", playerHand[i]);
+                cards[n].cardDrawn = 1;
+                playerPointTotal = playerPointTotal + cards[n].cardValue;
+            }
+            printf("\nPlayer point total: %d\n", playerPointTotal);
+            
+            //Initial Deal for dealer hand. Only first card is known.
+            printf("Dealer's hand is: ");
+            for(int i = 0; i < 2; i++)
+            {
+                int n = random(0, 52);
+                if(cards[n].cardDrawn != 0)
+                {
+                    while(cards[n].cardDrawn != 0)
+                    {
+                        n = random(0, 52);
+                        //printf("\n n is %d and cardDrawn is %d\n", n, cards[n].cardDrawn);
+                        //scanf("%s", input);
+                    }
+                }
+                strcpy(dealerHand[i], cards[n].cardName);
+                cards[n].cardDrawn = 1;
+                dealerPointTotal = dealerPointTotal + cards[n].cardValue;
 
+                if(i != 1){
+                    printf("%s and one unknown.", dealerHand[i]);
+                    dealerKnownTotal = dealerKnownTotal + cards[n].cardValue;
+                }
+            }
+            printf("\nDealer's known point total: %d\n", dealerKnownTotal);
+            //printf("\nDealer full hand: %s, %d points", dealerHand, dealerPointTotal);
+            scanf("%s", input);
+            
+        } 
+    }
+}
+
+//Define min as 0 and max as 52 when calling function. This, in tandem with srand, is what we use to grab a random card from the deck.
+//Example: n = random(0, 52);
+//I use n to check whether a card has been drawn before it is added to the player/dealer hand and point totals. - Jestyn
+int random(int min, int max){
+   return min + rand() / (RAND_MAX / (max - min + 1) + 1);
 }
