@@ -90,7 +90,8 @@ void play(){
         else if(strcmp(input, "play") == 0)
         {
             //Like with the struct, all of these will reset with the loop. - Jestyn
-            
+            int dcc = 0;
+            int pcc = 0;
             int aceCheck = 0;
             char playerHand[15][15];
             char dealerHand[15][15];
@@ -112,10 +113,6 @@ void play(){
                     while(cards[n].cardDrawn != 0)
                     {
                         n = random(0, 52);
-                        //printf("\nn is %d and cardDrawn is %d\n", n, cards[n].cardDrawn);
-                        //scanf("%s", input);
-                        //
-                        //This was to make sure that cards were being properly filtered if already having a cardDrawn value of 1.
                     }
                 }
                 //Checking if player is dealt an ace. This variable will be referenced later; if greater than 1, the player will be asked if they want to add 10 points later
@@ -126,7 +123,8 @@ void play(){
                 strcpy(playerHand[i], cards[n].cardName);
                 printf("%s ", playerHand[i]);
                 cards[n].cardDrawn = 1;
-                playerPointTotal = playerPointTotal + cards[n].cardValue; 
+                playerPointTotal = playerPointTotal + cards[n].cardValue;
+                pcc++; 
             }
             printf("\nPlayer point total: %d\n", playerPointTotal);
             
@@ -142,8 +140,6 @@ void play(){
                     while(cards[n].cardDrawn != 0)
                     {
                         n = random(0, 52);
-                        //printf("\n n is %d and cardDrawn is %d\n", n, cards[n].cardDrawn);
-                        //scanf("%s", input);
                     }
                 }
                 strcpy(dealerHand[i], cards[n].cardName);
@@ -155,11 +151,9 @@ void play(){
                     printf("%s and one unknown.", dealerHand[i]);
                     dealerKnownTotal = dealerKnownTotal + cards[n].cardValue;
                 }
+                dcc++;
             }
             printf("\nDealer's known point total: %d\n\n", dealerKnownTotal);
-            //printf("\nDealer full hand: %s, %d points", dealerHand, dealerPointTotal);
-            //
-            //This is for making sure that the dealerPointTotal is recording correctly. - Jestyn
 
 
 
@@ -184,20 +178,17 @@ void play(){
                         while (cards[n].cardDrawn != 0)
                         {
                             n = random(0, 52);
-                            // printf("\nn is %d and cardDrawn is %d\n", n, cards[n].cardDrawn);
-                            // scanf("%s", input);
-                            //
-                            // This was to make sure that cards were being properly filtered if already having a cardDrawn value of 1.
                         }
                     }
-                    //Checking if player is dealt an ace. This variable will be referenced later; if greater than 1, the player will be asked if they want to add 10 points later
                     if (n == 0 || n == 13 || n == 26 || n == 39)
                     {
                         aceCheck++;
                     }
                     strcpy(playerHand[i], cards[n].cardName);
                     playerPointTotal = playerPointTotal + cards[n].cardValue;
-                    printf("You drew %s\nYour new hand is %s\nYour point total is %d\n\n", cards[n].cardName, playerHand, playerPointTotal);
+                    pcc++;
+                    printf("You drew a %s", playerHand[i]);
+                    printf("\nPoint total is: %d\n", playerPointTotal);
                     if (playerPointTotal > 21)
                     {
                         while(playerPointTotal > 21)
@@ -231,12 +222,16 @@ void play(){
                 if(strcmp(input, "yes") == 0)
                 {
                     playerPointTotal = playerPointTotal + 10;
-                    printf("New player point total is %d\n", playerPointTotal);
+                    printf("\nNew player point total is %d\n\n", playerPointTotal);
                 }
             }
 
             // This block will reveal the dealer's hidden card. Dealer will draw if their point total is 15 or less, until point total is 16 or higher.
-            printf("\nNo more draws for the player!!\nThe dealer's hand is %s\nIt holds %d points\n", dealerHand, dealerPointTotal);
+            printf("\nNo more draws for the player!!\nThe dealer's hand is:");
+            for(int i = 0; i < dcc; i++)
+            {
+                printf(" %s", dealerHand[i]);
+            }
             i = 2;
             while (dealerPointTotal < 16)
             {
@@ -251,11 +246,31 @@ void play(){
                 strcpy(dealerHand[i], cards[n].cardName);
                 cards[n].cardDrawn = 1;
                 dealerPointTotal = dealerPointTotal + cards[n].cardValue;
-                printf("Dealer new hand is %s\nThe point total is %d\n", dealerHand, dealerPointTotal);
-                
+                dcc++;
+                printf("\nDealer draws %s for a new total of %d\n", dealerHand[i], dealerPointTotal);
                 i++;
             }
-            printf("\nNo more cards for the Dealer. Final hand is %s\nTotal of %d points\n", dealerHand, dealerPointTotal);
+            printf("\n\nNo more cards for the Dealer. Final hand is: ");
+            for(int i = 0; i < dcc; i++)
+            {
+                printf(" %s", dealerHand[i]);
+            }
+            printf("\nFinal point count for dealer is: %d\n\n", dealerPointTotal);
+
+            //Conclusions based on both PP and DP
+            if(dealerPointTotal > 21)
+            {
+                printf("The dealer point count exceeded 21. You win the round!\n\n");
+            }
+            else if(playerPointTotal > dealerPointTotal && dealerPointTotal < 22)
+            {
+                printf("Player wins with %d points, over the dealer's %d points!\n\n", playerPointTotal, dealerPointTotal);
+            }
+            else if(playerPointTotal <= dealerPointTotal && dealerPointTotal < 22)
+            {
+                printf("Dealer wins with %d points, equal to or higher than the player score of %d\nBetter luck next time!\n\n", dealerPointTotal, playerPointTotal);
+            }
+            printf("Would you like to play again?\n 'play' to play again, or 'quit' to close the game\n");
             scanf("%s", input);
 
         }
