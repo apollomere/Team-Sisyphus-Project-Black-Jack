@@ -7,3 +7,14 @@ Comments should be updated as blocks change to reflect the blocks asssociations(
 
 Block1: Code for deck and dealing cards randomly. 
 - Cards are either removed from deck, or we can setup a check for if a card has already been dealt.
+
+
+How to Run:
+
+Main located in the File located in card.c
+
+1.Download This Repository
+
+2. Run  gcc card.c -o card.exe in command line to make an executable
+
+3. NOTE: Ensure the directory is set to the proper file path for compilation!
